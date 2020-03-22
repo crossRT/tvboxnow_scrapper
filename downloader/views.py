@@ -10,6 +10,11 @@ def index(request):
     return HttpResponse('Downloader Index')
 
 
+def login(request):
+    scrapper.login()
+    return HttpResponseRedirect('/downloader/drama')
+
+
 def drama_index(request):
     items = scrapper.get_drama_index()
     context = {
