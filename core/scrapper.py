@@ -2,6 +2,7 @@ from django.apps import apps
 from bs4 import BeautifulSoup
 import requests
 import re
+import glob
 
 session = None
 
@@ -53,10 +54,16 @@ def get_drama_show(link):
         a_tag = item.find('a')
         link = a_tag.get('href')
         if 'H265' in item.text:
-            data.append({
+            row = {
                 'name': item.text,
                 'link': link,
-            })
+            }
+
+            file_path = apps.get_app_config('downloader').download_directory + item.text
+            if glob.glob(file_path + '*'):
+                row['is_downloaded'] = True
+
+            data.append(row)
     return data
 
 

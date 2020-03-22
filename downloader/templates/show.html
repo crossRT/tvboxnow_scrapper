@@ -1,7 +1,12 @@
 <ul>
     {% for item in items %}
         <li>
-            <a href="../download/{{item.link}}">{{item.name}}</a>
+            <a href="../download/{{item.link}}">
+                <span>{{item.name}}</span>
+                {% if item.is_downloaded %}
+                    <span>Downloaded</span>
+                {% endif %}
+            </a>
         </li>
     {% endfor %}
 </ul>
