@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import core.scrapper as scrapper
 
 
@@ -29,4 +29,4 @@ def drama_show(request, link):
 def drama_download(request, link):
     full_link = f"attachment.php?aid={request.GET.get('aid')}&k={request.GET.get('k')}&t={request.GET.get('t')}&sid={request.GET.get('sid')}"
     scrapper.get_drama_download(full_link)
-    return HttpResponse(link)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
