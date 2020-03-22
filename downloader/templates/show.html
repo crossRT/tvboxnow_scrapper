@@ -1,12 +1,19 @@
-<ul>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="items show">
     {% for item in items %}
-        <li>
-            <a href="../download/{{item.link}}">
-                <span>{{item.name}}</span>
-                {% if item.is_downloaded %}
-                    <span>Downloaded</span>
-                {% endif %}
-            </a>
-        </li>
+    <div class="item">
+        <a class="name" href="../download/{{item.link}}">
+            <span>{{item.name}}</span>
+        </a>
+        <span class="icon">
+            {% if item.is_downloaded %}
+                <i class="fas fa-check-circle"></i>
+            {% endif %}
+        </span>
+
+    </div>
     {% endfor %}
-</ul>
+</div>
+{% endblock %}
